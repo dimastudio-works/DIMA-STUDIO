@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#080a18">
+<link rel="icon" type="image/png" href="dima-logo.png">
+<title>DIMA STUDIO — Create. Code. Play.</title>
+<style>
+:root{--bg:#080a18;--panel:#10152b;--panel2:#141b35;--cyan:#53e7ff;--purple:#a879ff;--pink:#ff62c7;--text:#f4f6ff;--muted:#aab3d0;--line:rgba(122,155,255,.18)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:radial-gradient(ellipse at 80% 0%,rgba(93,62,190,.18),transparent 38%),radial-gradient(ellipse at 0% 35%,rgba(38,187,222,.12),transparent 35%),var(--bg);color:var(--text);font-family:Inter,Segoe UI,Arial,sans-serif;line-height:1.6}
+a{color:inherit;text-decoration:none}.wrap{width:min(1120px,92%);margin:auto}
+header{position:sticky;top:0;z-index:10;background:rgba(8,10,24,.82);backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}
+.nav{height:76px;display:flex;align-items:center;justify-content:space-between;gap:20px}.brand{font-weight:900;letter-spacing:1.5px;font-size:19px}.brand span{color:var(--cyan);text-shadow:0 0 18px #53e7ff80}.navlinks{display:flex;gap:24px;color:var(--muted);font-size:14px}.navlinks a:hover{color:var(--cyan)}
+.menu{display:none;background:none;border:1px solid var(--line);color:white;border-radius:10px;padding:8px 12px;font-size:20px}
+.hero{padding:105px 0 90px;min-height:600px;display:grid;grid-template-columns:1.15fr .85fr;align-items:center;gap:40px}
+.kicker{color:var(--cyan);font-size:12px;letter-spacing:3px;font-weight:800;text-transform:uppercase}
+h1{font-size:clamp(46px,7vw,82px);line-height:.98;letter-spacing:-3px;margin:18px 0 22px;font-weight:950}
+h1 .glow{background:linear-gradient(100deg,var(--cyan),#a7a2ff 55%,var(--pink));-webkit-background-clip:text;background-clip:text;color:transparent}
+.lead{color:var(--muted);font-size:18px;max-width:590px}.actions{display:flex;gap:14px;flex-wrap:wrap;margin-top:30px}
+.btn{display:inline-flex;align-items:center;justify-content:center;border-radius:12px;padding:13px 20px;font-weight:800;border:1px solid var(--cyan);background:linear-gradient(100deg,#39dff4,#8b76ff);color:#070a19;box-shadow:0 0 28px #53e7ff28;cursor:pointer;transition:.2s}
+.btn:hover{transform:translateY(-2px);box-shadow:0 0 34px #53e7ff55}.btn.secondary{background:transparent;color:var(--text);border-color:var(--line);box-shadow:none}
+.visual{min-height:350px;position:relative;display:grid;place-items:center}.orb{width:min(340px,75vw);aspect-ratio:1;border-radius:50%;border:1px solid #53e7ff70;box-shadow:0 0 35px #53e7ff25,inset 0 0 50px #9c64ff20;display:grid;place-items:center;position:relative;background:radial-gradient(circle,#28305a 0%,#12162f 46%,#0b0e20 72%)}
+.orb:before,.orb:after{content:"";position:absolute;inset:20px;border:1px solid #a879ff80;border-radius:50%;transform:rotateX(65deg) rotateZ(25deg)}.orb:after{transform:rotateX(65deg) rotateZ(-35deg);border-color:#53e7ff80}
+.core{text-align:center;z-index:1}.core b{font-size:58px;display:block;line-height:1;color:var(--cyan);text-shadow:0 0 25px #53e7ff}.core small{letter-spacing:4px;color:#d8d5ff;font-weight:800}
+.float{position:absolute;padding:10px 14px;border:1px solid var(--line);border-radius:12px;background:#11172ddd;color:var(--muted);font-size:13px;box-shadow:0 10px 30px #0005}.f1{top:12%;left:0}.f2{right:0;top:27%}.f3{bottom:12%;left:12%}
+section{padding:82px 0}.section-head{max-width:650px;margin-bottom:34px}.section-head h2{font-size:clamp(30px,4vw,44px);line-height:1.1;margin:10px 0}.section-head p{color:var(--muted)}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.card{padding:26px;border-radius:18px;border:1px solid var(--line);background:linear-gradient(145deg,#141a34dd,#0d1124dd);transition:.2s}.card:hover{transform:translateY(-5px);border-color:#53e7ff70;box-shadow:0 14px 35px #0004}.icon{font-size:30px}.card h3{margin:12px 0 8px}.card p{color:var(--muted);font-size:14px;margin:0}.tag{display:inline-block;margin-top:18px;color:var(--cyan);font-size:12px;letter-spacing:1px;font-weight:800}
+.portfolio{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.project{min-height:190px;border:1px solid var(--line);border-radius:18px;padding:22px;display:flex;flex-direction:column;justify-content:space-between;background:linear-gradient(135deg,#1b2750,#11142b 65%,#27163e)}.project:nth-child(2){background:linear-gradient(135deg,#123b4b,#11142b 65%,#281b50)}.project:nth-child(3){background:linear-gradient(135deg,#3b2050,#11142b 65%,#172b4a)}.project small{color:var(--cyan);letter-spacing:2px}.project h3{font-size:22px;margin:12px 0 4px}.project p{color:var(--muted);font-size:14px;margin:0}
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}.step{padding:20px;border-top:2px solid var(--cyan);background:#11162b;border-radius:0 0 14px 14px}.step b{color:var(--purple);font-size:13px}.step h3{margin:8px 0}.step p{color:var(--muted);font-size:13px;margin:0}
+.price-note{padding:24px;border:1px solid #a879ff55;border-radius:16px;background:linear-gradient(110deg,#191634,#11162a);color:var(--muted)}.price-note strong{color:white}
+.contact-grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:26px}.contact-box,.formbox{padding:26px;border:1px solid var(--line);border-radius:18px;background:#10152b}.contact-box p{color:var(--muted)}label{display:block;font-size:13px;color:#cbd2eb;margin:14px 0 6px}input,select,textarea{width:100%;padding:13px 14px;border-radius:10px;border:1px solid #344064;background:#090e20;color:white;font:inherit;outline:none}input:focus,select:focus,textarea:focus{border-color:var(--cyan)}textarea{min-height:110px;resize:vertical}.formbox .btn{margin-top:16px;width:100%}.hint{font-size:12px;color:var(--muted);margin-top:12px}
+footer{padding:28px 0;border-top:1px solid var(--line);color:var(--muted);font-size:13px}.foot{display:flex;justify-content:space-between;gap:15px;flex-wrap:wrap}
+@media(max-width:800px){.hero{grid-template-columns:1fr;padding:75px 0 50px}.visual{min-height:300px}.cards,.portfolio{grid-template-columns:1fr}.steps{grid-template-columns:repeat(2,1fr)}.contact-grid{grid-template-columns:1fr}.navlinks{display:none;position:absolute;top:76px;left:0;right:0;padding:18px 4%;background:#0b0e20;flex-direction:column;gap:14px;border-bottom:1px solid var(--line)}.navlinks.open{display:flex}.menu{display:block}}
+@media(max-width:460px){.steps{grid-template-columns:1fr}h1{letter-spacing:-2px}.orb{width:260px}.float{font-size:11px;padding:7px 9px}}
+</style>
+</head>
+<body>
+<header><div class="wrap nav">
+  <a class="brand" href="#home">DIMA <span>STUDIO</span></a>
+  <button class="menu" id="menuBtn" aria-label="Відкрити меню">☰</button>
+  <nav class="navlinks" id="navlinks"><a href="#services">Послуги</a><a href="#works">Портфоліо</a><a href="#process">Як працюємо</a><a href="#contact">Замовити</a></nav>
+</div></header>
+<main>
+<section class="wrap hero" id="home">
+  <div><div class="kicker">Digital creative studio</div>
+    <h1>ТВОЇ ІДЕЇ.<br><span class="glow">НАШ КОД.</span></h1>
+    <p class="lead">Створюємо сайти, браузерні ігри та презентації з характером. Сучасний дизайн, увага до деталей і персональний підхід до кожного проєкту.</p>
+    <div class="actions"><a class="btn" href="#contact">Обговорити проєкт ↗</a><a class="btn secondary" href="#services">Наші послуги</a></div>
+  </div>
+  <div class="visual" aria-label="Декоративна неонова емблема DIMA STUDIO"><div class="orb"><div class="core"><b>DS</b><small>CREATE · CODE · PLAY</small></div></div><div class="float f1">✦ WEB DESIGN</div><div class="float f2">⌘ GAME DEV</div><div class="float f3">▤ PRESENTATIONS</div></div>
+</section>
+<section id="services"><div class="wrap"><div class="section-head"><div class="kicker">What we do</div><h2>Послуги студії</h2><p>Від першої ідеї до готового цифрового результату.</p></div>
+  <div class="cards">
+    <article class="card"><div class="icon">🌐</div><h3>Створення сайтів</h3><p>Сайти-візитки, сторінки для проєктів, портфоліо та інтерактивні вебсторінки.</p><span class="tag">WEB DEVELOPMENT</span></article>
+    <article class="card"><div class="icon">🎮</div><h3>Створення ігор</h3><p>Невеликі 2D- та 3D-ігри, браузерні розваги й інтерактивні прототипи.</p><span class="tag">GAME DEVELOPMENT</span></article>
+    <article class="card"><div class="icon">📊</div><h3>Презентації</h3><p>Стильні слайди для навчання, ідей, проєктів і невеликих бізнесів.</p><span class="tag">PRESENTATION DESIGN</span></article>
+  </div>
+</div></section>
+<section id="works"><div class="wrap"><div class="section-head"><div class="kicker">Selected concepts</div><h2>Приклади робіт</h2><p>Це демонстраційні концепції стилів. Тут можна замінити їх на справжні завершені проєкти студії.</p></div>
+  <div class="portfolio">
+    <article class="project"><div><small>01 / WEBSITE</small><h3>Neon Landing</h3><p>Концепт сучасної головної сторінки.</p></div><span>🌐</span></article>
+    <article class="project"><div><small>02 / GAME</small><h3>Pixel Adventure</h3><p>Ідея невеликої браузерної гри.</p></div><span>🕹️</span></article>
+    <article class="project"><div><small>03 / SLIDES</small><h3>Future Vision</h3><p>Концепт презентації в неоновому стилі.</p></div><span>✧</span></article>
+  </div>
+</div></section>
+<section id="process"><div class="wrap"><div class="section-head"><div class="kicker">Workflow</div><h2>Як ми працюємо</h2><p>Зрозумілі етапи, щоб результат відповідав очікуванням.</p></div>
+  <div class="steps">
+    <div class="step"><b>STEP 01</b><h3>Ідея</h3><p>Ти описуєш, що хочеш отримати.</p></div>
+    <div class="step"><b>STEP 02</b><h3>План</h3><p>Узгоджуємо обсяг, термін і ціну.</p></div>
+    <div class="step"><b>STEP 03</b><h3>Розробка</h3><p>Створюємо проєкт і погоджуємо проміжний результат.</p></div>
+    <div class="step"><b>STEP 04</b><h3>Готово</h3><p>Перевіряємо та передаємо фінальну роботу.</p></div>
+  </div>
+</div></section>
+<section><div class="wrap"><div class="price-note"><strong>Індивідуальна вартість</strong><br>Кожне замовлення оцінюється окремо — залежно від складності, функцій та часу на виконання. Перед початком робіт погоджуємо ціну й термін.</div></div></section>
+<section id="contact"><div class="wrap"><div class="section-head"><div class="kicker">Let's create</div><h2>Є ідея? Розкажи нам.</h2><p>Заповни коротку заявку — Telegram відкриється з готовим повідомленням для надсилання.</p></div>
+  <div class="contact-grid">
+    <div class="contact-box"><div class="icon">⚡</div><h3>DIMA STUDIO</h3><p>CREATE. CODE. PLAY.</p><p>Сайти · Ігри · Презентації</p><p class="hint">Заявки відкриваються в Telegram: @vlnrGTZIfU. Повідомлення потрібно надіслати вручну.</p></div>
+    <form class="formbox" id="orderForm">
+      <label for="client">Як до тебе звертатися?</label><input id="client" required maxlength="50" placeholder="Твоє ім'я або нік">
+      <label for="service">Що потрібно?</label><select id="service"><option>Створення сайту</option><option>Створення гри</option><option>Презентація</option><option>Інше</option></select>
+      <label for="details">Опиши свою ідею</label><textarea id="details" required maxlength="1000" placeholder="Що саме потрібно зробити?"></textarea>
+      <button class="btn" type="submit">Надіслати заявку через Telegram ↗</button>
+      <div class="hint" id="formHint" aria-live="polite">Після натискання відкриється Telegram із готовим текстом. Перевір його та натисни «Надіслати».</div>
+    </form>
+  </div>
+</div></section>
+</main>
+<footer><div class="wrap foot"><span>© <span id="year"></span> DIMA STUDIO</span><span>CREATE. CODE. PLAY. ✦</span></div></footer>
+<script>
+const menuBtn=document.getElementById('menuBtn'),nav=document.getElementById('navlinks');
+menuBtn.addEventListener('click',()=>nav.classList.toggle('open'));
+nav.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>nav.classList.remove('open')));
+document.getElementById('year').textContent=new Date().getFullYear();
+document.getElementById('orderForm').addEventListener('submit',e=>{
+  e.preventDefault();
+  const name=document.getElementById('client').value.trim();
+  const service=document.getElementById('service').value;
+  const details=document.getElementById('details').value.trim();
+  const message=`Заявка до DIMA STUDIO\nІм'я/нік: ${name}\nПослуга: ${service}\nОпис: ${details}`;
+  const telegramUrl='https://t.me/vlnrGTZIfU?text='+encodeURIComponent(message);
+  const hint=document.getElementById('formHint');
+  const telegramTab=window.open(telegramUrl,'_blank','noopener,noreferrer');
+  if(telegramTab){
+    hint.textContent='Telegram відкрито з готовою заявкою. Перевір повідомлення та натисни «Надіслати».';
+  } else {
+    hint.textContent='Браузер заблокував нову вкладку. Відкрий Telegram за посиланням: ';
+    const link=document.createElement('a');
+    link.href=telegramUrl; link.target='_blank'; link.rel='noopener noreferrer';
+    link.textContent='Відкрити Telegram із заявкою';
+    hint.appendChild(link);
+  }
+});
+</script>
+</body>
+</html>
