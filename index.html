@@ -39,7 +39,7 @@ footer{padding:28px 0;border-top:1px solid var(--line);color:var(--muted);font-s
 <header><div class="wrap nav">
   <a class="brand" href="#home">DIMA <span>STUDIO</span></a>
   <button class="menu" id="menuBtn" aria-label="Відкрити меню">☰</button>
-  <nav class="navlinks" id="navlinks"><a href="#services">Послуги</a><a href="#works">Портфоліо</a><a href="#process">Як працюємо</a><a href="#telegram">Telegram</a><a href="#contact">Замовити</a></nav>
+  <nav class="navlinks" id="navlinks"><a href="#services">Послуги</a><a href="#works">Портфоліо</a><a href="#process">Як працюємо</a><a href="#contact">Замовити</a></nav>
 </div></header>
 <main>
 <section class="wrap hero" id="home">
@@ -73,32 +73,6 @@ footer{padding:28px 0;border-top:1px solid var(--line);color:var(--muted);font-s
   </div>
 </div></section>
 <section><div class="wrap"><div class="price-note"><strong>Індивідуальна вартість</strong><br>Кожне замовлення оцінюється окремо — залежно від складності, функцій та часу на виконання. Перед початком робіт погоджуємо ціну й термін.</div></div></section>
-<section id="telegram">
-  <div class="wrap">
-    <div class="section-head">
-      <div class="kicker">Stay connected</div>
-      <h2>Не пропусти нові ідеї! 🚀</h2>
-      <p>Підписуйся на наші Telegram-канали, щоб першими дізнаватися про нові проєкти, розробки та можливості DIMA STUDIO.</p>
-    </div>
-
-    <div class="cards">
-      <article class="card">
-        <div class="icon">🖨️</div>
-        <h3>3D-друк</h3>
-        <p>Нові 3D-моделі, друк та цікаві вироби.</p>
-        <a class="btn" href="https://t.me/+NkGHi0ggZTUwYmUy" target="_blank" rel="noopener noreferrer">Підписатися ↗</a>
-      </article>
-
-      <article class="card">
-        <div class="icon">💻</div>
-        <h3>Сайти та презентації</h3>
-        <p>Нові сайти, цифрові проєкти, ідеї та презентації.</p>
-        <a class="btn" href="https://t.me/DIMASTUDIOTELEGRAM" target="_blank" rel="noopener noreferrer">Підписатися ↗</a>
-      </article>
-    </div>
-  </div>
-</section>
-
 <section id="contact"><div class="wrap"><div class="section-head"><div class="kicker">Let's create</div><h2>Є ідея? Розкажи нам.</h2><p>Заповни коротку заявку — Telegram відкриється з готовим повідомленням для надсилання.</p></div>
   <div class="contact-grid">
     <div class="contact-box"><div class="icon">⚡</div><h3>DIMA STUDIO</h3><p>CREATE. CODE. PLAY.</p><p>Сайти · Ігри · Презентації</p><p class="hint">Заявки відкриваються в Telegram: @vlnrGTZIfU. Повідомлення потрібно надіслати вручну.</p></div>
@@ -124,7 +98,8 @@ document.getElementById('orderForm').addEventListener('submit',e=>{
   const service=document.getElementById('service').value;
   const details=document.getElementById('details').value.trim();
   const message=`Заявка до DIMA STUDIO\nІм'я/нік: ${name}\nПослуга: ${service}\nОпис: ${details}`;
-  const telegramUrl='https://t.me/vlnrGTZIfU?text='+encodeURIComponent(message);
+  const savedContact=(()=>{try{return JSON.parse(localStorage.getItem('dimaStudioAdminSettingsV1')||'{}').telegram||'vlnrGTZIfU'}catch(e){return 'vlnrGTZIfU'}})();
+  const telegramUrl='https://t.me/'+savedContact+'?text='+encodeURIComponent(message);
   const hint=document.getElementById('formHint');
   const telegramTab=window.open(telegramUrl,'_blank','noopener,noreferrer');
   if(telegramTab){
@@ -138,5 +113,145 @@ document.getElementById('orderForm').addEventListener('submit',e=>{
   }
 });
 </script>
+
+<style>
+#dsAdminEntry{position:fixed;right:18px;bottom:18px;z-index:2147483000;min-width:112px;height:46px;padding:0 16px;border:1px solid #53e7ff;border-radius:14px;background:linear-gradient(135deg,#10152bF5,#172b49F5);color:#70efff;font:700 13px/1.1 Arial,sans-serif;letter-spacing:1px;cursor:pointer;opacity:.96;box-shadow:0 0 18px #53e7ff55, inset 0 0 12px #53e7ff12;transition:.2s}
+#dsAdminEntry:hover,#dsAdminEntry:focus-visible{opacity:1;box-shadow:0 0 26px #53e7ff99;transform:translateY(-2px);outline:2px solid #53e7ff}
+#dsAdminOverlay{z-index:2147483001}
+@media(max-width:600px){#dsAdminEntry{right:12px;bottom:12px;min-width:100px;height:44px}}
+#dsAdminOverlay{display:none;position:fixed;inset:0;z-index:10000;background:#050713ed;backdrop-filter:blur(12px);overflow:auto;padding:24px}
+#dsAdminPanel{max-width:1050px;margin:25px auto;background:#10152b;border:1px solid #53e7ff66;border-radius:20px;padding:24px;box-shadow:0 0 50px #53e7ff22;color:#f4f6ff}
+#dsAdminPanel h2{margin:0 0 6px;color:#53e7ff}
+#dsAdminPanel .dsSub{color:#aab3d0;font-size:13px;margin:0 0 18px}
+#dsAdminPanel .dsGrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(185px,1fr));gap:10px;margin:16px 0}
+#dsAdminPanel button,#dsAdminPanel input,#dsAdminPanel textarea{font:inherit}
+#dsAdminPanel button{border:1px solid #344064;background:#151d39;color:#f4f6ff;border-radius:10px;padding:11px 12px;cursor:pointer;text-align:left;transition:.15s}
+#dsAdminPanel button:hover{border-color:#53e7ff;color:#53e7ff;transform:translateY(-1px)}
+#dsAdminPanel .dsTop{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+#dsAdminPanel .dsClose{background:#3a1830;border-color:#ff62c7}
+#dsAdminPanel .dsGroup{border-top:1px solid #344064;padding-top:14px;margin-top:14px}
+#dsAdminPanel .dsGroup h3{font-size:14px;color:#a879ff;letter-spacing:1px;margin:0 0 8px}
+#dsAdminPanel .dsStatus{background:#090e20;border:1px solid #344064;border-radius:10px;padding:12px;color:#aab3d0;font-size:13px;white-space:pre-wrap;min-height:42px}
+#dsAdminPanel input,#dsAdminPanel textarea{width:100%;background:#090e20;color:white;border:1px solid #344064;border-radius:9px;padding:10px;margin:5px 0 10px}
+#dsAdminPanel textarea{min-height:75px}
+#dsAdminPanel .dsWarn{color:#ffd38a;font-size:12px;line-height:1.5;margin-top:12px}
+@media(max-width:600px){#dsAdminOverlay{padding:8px}#dsAdminPanel{padding:15px;margin:8px auto}}
+</style>
+<button id="dsAdminEntry" title="Відкрити панель адміністратора (Ctrl+Shift+A)" aria-label="Відкрити панель адміністратора">⚙ ADMIN</button>
+<div id="dsAdminOverlay" role="dialog" aria-modal="true" aria-label="Панель адміністратора">
+ <div id="dsAdminPanel">
+  <div class="dsTop"><div><h2>⚡ DIMA STUDIO — ADMIN</h2><p class="dsSub">Центр керування сайтом · локальні налаштування цього браузера</p></div><button class="dsClose" id="dsAdminClose">✕ Закрити</button></div>
+  <div class="dsStatus" id="dsAdminStatus">Панель готова. Обери інструмент.</div>
+  <div class="dsGroup"><h3>📊 СТАТИСТИКА ТА ДІАГНОСТИКА</h3><div class="dsGrid">
+   <button data-action="stats">📊 1. Статистика сайту</button>
+   <button data-action="check">🩺 2. Перевірити елементи</button>
+   <button data-action="visitor">👁️ 3. Лічильник відкриттів</button>
+   <button data-action="log">📜 4. Журнал дій</button>
+  </div></div>
+  <div class="dsGroup"><h3>✏️ РЕДАГУВАННЯ САЙТУ</h3><div class="dsGrid">
+   <button data-action="headline">✍️ 5. Змінити головний заголовок</button>
+   <button data-action="lead">📝 6. Змінити опис студії</button>
+   <button data-action="announcement">📢 7. Додати оголошення</button>
+   <button data-action="clearAnnouncement">🧹 8. Прибрати оголошення</button>
+   <button data-action="price">💰 9. Змінити текст про ціни</button>
+   <button data-action="portfolio">🖼️ 10. Додати роботу в портфоліо</button>
+   <button data-action="service">🧩 11. Додати послугу</button>
+   <button data-action="contact">📨 12. Змінити Telegram-контакт</button>
+  </div></div>
+  <div class="dsGroup"><h3>🎨 ВИГЛЯД І КЕРУВАННЯ</h3><div class="dsGrid">
+   <button data-action="theme">🌈 13. Перемкнути неонову тему</button>
+   <button data-action="glow">✨ 14. Увімкнути/вимкнути сяйво</button>
+   <button data-action="compact">📐 15. Компактний режим</button>
+   <button data-action="hideWorks">🙈 16. Показати/сховати портфоліо</button>
+   <button data-action="hideSteps">🧭 17. Показати/сховати етапи</button>
+   <button data-action="maintenance">🚧 18. Режим технічних робіт</button>
+   <button data-action="top">⬆️ 19. На початок сайту</button>
+   <button data-action="refresh">🔄 20. Оновити сторінку</button>
+  </div></div>
+  <div class="dsGroup"><h3>🛠️ ДАНІ ТА ІНСТРУМЕНТИ</h3><div class="dsGrid">
+   <button data-action="export">📦 21. Експорт налаштувань</button>
+   <button data-action="import">📥 22. Імпорт налаштувань</button>
+   <button data-action="copyLink">🔗 23. Копіювати адресу сайту</button>
+   <button data-action="copyContact">📲 24. Копіювати Telegram</button>
+   <button data-action="reset">♻️ 25. Скинути зміни сайту</button>
+   <button data-action="lock">🔒 26. Вийти з адмінпанелі</button>
+  </div></div>
+  <p class="dsWarn">Важливо: ця панель зберігає зміни в localStorage лише в браузері, де їх зроблено. Вона не отримує заявки інших відвідувачів автоматично. Парольна перевірка в HTML — це лише прихований вхід, а не справжній захист: для безпечного адміністрування та спільних даних потрібен сервер.</p>
+ </div>
+</div>
+<script>
+(()=>{
+ const PASS='1728394506500';
+ const overlay=document.getElementById('dsAdminOverlay');
+ const status=document.getElementById('dsAdminStatus');
+ const entry=document.getElementById('dsAdminEntry');
+ const KEY='dimaStudioAdminSettingsV1';
+ const LOG='dimaStudioAdminLogV1';
+ let opened=false;
+ const read=()=>{try{return JSON.parse(localStorage.getItem(KEY)||'{}')}catch(e){return {}}};
+ const save=o=>localStorage.setItem(KEY,JSON.stringify(o));
+ const say=t=>{status.textContent=t;};
+ const log=t=>{let a=[];try{a=JSON.parse(localStorage.getItem(LOG)||'[]')}catch(e){}a.unshift(new Date().toLocaleString('uk-UA')+' — '+t);localStorage.setItem(LOG,JSON.stringify(a.slice(0,40)));say(t);};
+ const ask=(label,old='')=>prompt(label,old);
+ const setText=(selector,value)=>{const el=document.querySelector(selector);if(el)el.textContent=value;};
+ const restore=()=>{
+  const s=read();
+  if(s.headline){const h=document.querySelector('.hero h1');if(h)h.textContent=s.headline;}
+  if(s.lead)setText('.hero .lead',s.lead);
+  if(s.price)setText('.price-note',s.price);
+  if(s.announcement)showAnnouncement(s.announcement);
+  if(s.hideWorks){const el=document.getElementById('works');if(el)el.style.display='none';}
+  if(s.hideSteps){const el=document.getElementById('process');if(el)el.style.display='none';}
+  if(s.compact)document.body.classList.add('dsCompact');
+  if(s.noGlow)document.body.classList.add('dsNoGlow');
+  if(s.altTheme)document.documentElement.style.setProperty('--cyan','#ff62c7');
+  if(s.maintenance)showAnnouncement('🚧 Сайт тимчасово оновлюється. Спробуйте зайти трохи пізніше.');
+  if(s.portfolio&&Array.isArray(s.portfolio)){const box=document.querySelector('.portfolio');s.portfolio.forEach(p=>addPortfolioCard(box,p,false));}
+  if(s.services&&Array.isArray(s.services)){const box=document.querySelector('#services .cards');s.services.forEach(p=>addServiceCard(box,p,false));}
+ };
+ function showAnnouncement(t){let b=document.getElementById('dsAnnouncement');if(!b){b=document.createElement('div');b.id='dsAnnouncement';b.style.cssText='position:relative;z-index:9;text-align:center;padding:12px 18px;background:linear-gradient(90deg,#183c54,#34204d);border-bottom:1px solid #53e7ff66;color:white';const h=document.querySelector('header');h.insertAdjacentElement('afterend',b);}b.textContent=t;}
+ function addPortfolioCard(box,p,store=true){if(!box)return;const a=document.createElement('article');a.className='project';const d=document.createElement('div'),sm=document.createElement('small'),h=document.createElement('h3'),para=document.createElement('p');sm.textContent='NEW / PROJECT';h.textContent=p.title;para.textContent=p.desc;d.append(sm,h,para);a.append(d);const icon=document.createElement('span');icon.textContent='✦';a.append(icon);box.append(a);if(store){const s=read();s.portfolio=s.portfolio||[];s.portfolio.push(p);save(s);}}
+ function addServiceCard(box,p,store=true){if(!box)return;const a=document.createElement('article');a.className='card';const h=document.createElement('h3'),para=document.createElement('p'),tag=document.createElement('span');h.textContent=p.title;para.textContent=p.desc;tag.className='tag';tag.textContent='CUSTOM SERVICE';a.append(h,para,tag);box.append(a);if(store){const s=read();s.services=s.services||[];s.services.push(p);save(s);}}
+ function unlock(){const p=prompt('Введи пароль адміністратора:');if(p===null)return;if(p!==PASS){alert('Пароль неправильний.');return;}opened=true;overlay.style.display='block';log('Вхід до панелі адміністратора');}
+ entry.addEventListener('click',unlock);
+ document.getElementById('dsAdminClose').addEventListener('click',()=>{overlay.style.display='none';opened=false;});
+ document.addEventListener('keydown',e=>{if(e.ctrlKey&&e.shiftKey&&e.key.toLowerCase()==='a'){e.preventDefault();if(opened){overlay.style.display='block';}else unlock();}if(e.key==='Escape'&&opened){overlay.style.display='none';opened=false;}});
+ document.getElementById('dsAdminPanel').addEventListener('click',e=>{
+  const b=e.target.closest('button[data-action]');if(!b)return;const action=b.dataset.action;const s=read();
+  switch(action){
+   case 'stats':say('📊 Статистика цього браузера\\nВідкриттів: '+(localStorage.getItem('dsVisits')||'0')+'\\nЗбережені локальні зміни: '+Object.keys(s).join(', ')+'\\nПоточна адреса: '+location.href);break;
+   case 'check':{const ids=['home','services','works','process','contact','orderForm'];say('🩺 Перевірка структури\\n'+ids.map(id=>id+': '+(document.getElementById(id)?'OK':'НЕ ЗНАЙДЕНО')).join('\\n')+'\\nTelegram: '+(document.getElementById('orderForm')?'форма знайдена':'форма відсутня'));break;}
+   case 'visitor':say('👁️ Лічильник відкриттів у цьому браузері: '+(localStorage.getItem('dsVisits')||'0')+'. Це не загальна статистика всіх відвідувачів.');break;
+   case 'log':{let a=[];try{a=JSON.parse(localStorage.getItem(LOG)||'[]')}catch(e){}say(a.length?a.join('\\n'):'Журнал поки порожній.');break;}
+   case 'headline':{const v=ask('Новий заголовок (можна використати <br> для переносу):');if(v===null)return;const h=document.querySelector('.hero h1');if(h)h.textContent=v;s.headline=v;save(s);log('Змінено головний заголовок');break;}
+   case 'lead':{const v=ask('Новий опис студії:',document.querySelector('.hero .lead')?.textContent||'');if(v===null)return;setText('.hero .lead',v);s.lead=v;save(s);log('Змінено опис студії');break;}
+   case 'announcement':{const v=ask('Текст оголошення:');if(v===null)return;s.announcement=v;save(s);showAnnouncement(v);log('Додано оголошення');break;}
+   case 'clearAnnouncement':delete s.announcement;save(s);document.getElementById('dsAnnouncement')?.remove();log('Оголошення прибрано');break;
+   case 'price':{const v=ask('Новий текст про вартість:',document.querySelector('.price-note')?.innerText||'');if(v===null)return;setText('.price-note',v);s.price=v;save(s);log('Змінено блок цін');break;}
+   case 'portfolio':{const title=ask('Назва роботи:');if(!title)return;const desc=ask('Короткий опис:');if(desc===null)return;addPortfolioCard(document.querySelector('.portfolio'),{title,desc});log('Додано роботу: '+title);break;}
+   case 'service':{const title=ask('Назва послуги:');if(!title)return;const desc=ask('Опис послуги:');if(desc===null)return;addServiceCard(document.querySelector('#services .cards'),{title,desc});log('Додано послугу: '+title);break;}
+   case 'contact':{const v=ask('Telegram username без @:', 'vlnrGTZIfU');if(!v)return;const clean=v.replace(/^@/,'');const link=document.querySelector('.contact-box .hint');if(link)link.textContent='Заявки відкриваються в Telegram: @'+clean+'. Повідомлення потрібно надіслати вручну.';const old=document.querySelector('#orderForm');if(old)old.dataset.telegram=clean;s.telegram=clean;save(s);const scriptNote='Контакт змінено. Для нових заявок оновіть сторінку після збереження.';log(scriptNote);break;}
+   case 'theme':s.altTheme=!s.altTheme;save(s);document.documentElement.style.setProperty('--cyan',s.altTheme?'#ff62c7':'#53e7ff');log('Неонову тему перемкнуто');break;
+   case 'glow':s.noGlow=!s.noGlow;save(s);document.body.classList.toggle('dsNoGlow',s.noGlow);log(s.noGlow?'Сяйво вимкнено':'Сяйво увімкнено');break;
+   case 'compact':s.compact=!s.compact;save(s);document.body.classList.toggle('dsCompact',s.compact);log(s.compact?'Компактний режим увімкнено':'Компактний режим вимкнено');break;
+   case 'hideWorks':s.hideWorks=!s.hideWorks;save(s);document.getElementById('works').style.display=s.hideWorks?'none':'';log(s.hideWorks?'Портфоліо приховано':'Портфоліо показано');break;
+   case 'hideSteps':s.hideSteps=!s.hideSteps;save(s);document.getElementById('process').style.display=s.hideSteps?'none':'';log(s.hideSteps?'Етапи приховано':'Етапи показано');break;
+   case 'maintenance':s.maintenance=!s.maintenance;save(s);if(s.maintenance)showAnnouncement('🚧 Сайт тимчасово оновлюється. Спробуйте зайти трохи пізніше.');else if(!s.announcement)document.getElementById('dsAnnouncement')?.remove();log(s.maintenance?'Увімкнено режим технічних робіт':'Режим технічних робіт вимкнено');break;
+   case 'top':window.scrollTo({top:0,behavior:'smooth'});say('Прокручено на початок сайту.');break;
+   case 'refresh':location.reload();break;
+   case 'export':{const blob=new Blob([JSON.stringify(s,null,2)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='dima-studio-settings.json';a.click();URL.revokeObjectURL(a.href);log('Експортовано налаштування');break;}
+   case 'import':{const raw=ask('Встав сюди вміст JSON-файлу налаштувань:');if(!raw)return;try{const obj=JSON.parse(raw);save(obj);alert('Налаштування імпортовано. Сторінка перезавантажиться.');location.reload();}catch(e){alert('Не вдалося прочитати JSON.');}break;}
+   case 'copyLink':navigator.clipboard?.writeText(location.href).then(()=>say('Адресу сайту скопійовано.')).catch(()=>say('Не вдалося скопіювати автоматично: '+location.href));break;
+   case 'copyContact':{const s2=read(),u='@'+(s2.telegram||'vlnrGTZIfU');navigator.clipboard?.writeText(u).then(()=>say('Telegram '+u+' скопійовано.')).catch(()=>say('Твій Telegram: '+u));break;}
+   case 'reset':if(confirm('Скинути всі локальні зміни DIMA STUDIO у цьому браузері?')){localStorage.removeItem(KEY);location.reload();}break;
+   case 'lock':overlay.style.display='none';opened=false;log('Вихід із панелі адміністратора');break;
+  }
+ });
+ const visits=Number(localStorage.getItem('dsVisits')||0)+1;localStorage.setItem('dsVisits',String(visits));
+ const css=document.createElement('style');css.textContent='.dsCompact section{padding-top:45px;padding-bottom:45px}.dsNoGlow .btn,.dsNoGlow .orb,.dsNoGlow .core b{box-shadow:none!important;text-shadow:none!important}';document.head.append(css);
+ restore();
+})();
+</script>
+
 </body>
 </html>
